@@ -88,13 +88,11 @@ setInterval(() => {
 
 //APIkey and Fetch Function/
 
-button.addEventListener('click',function(){
  fetch ("https://api.openweathermap.org/data/2.5/weather?q="+searchValue +'&appid=389e99137584af0845e21489c7fa8c55')
     .then(response => response.json())
     .then (data => console.log(data))
 
     .catch(err => alert("Wrong City Name")) 
-})
 
   })
 })
