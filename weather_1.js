@@ -120,15 +120,20 @@ $(document).ready(function () {
             latitude+
             "&lon="+
             +longitude
+            +'&units=imperial'
             +'&exclude=minutely,hourly,daily'
             +"&appid=389e99137584af0845e21489c7fa8c55"
         )
         .then((response) => response.json())
         .then((data) => {
-          const uviValue = data["current"]["uvi"]
+          const uviValue = data["current"]["uvi"];
           console.log(uviValue)
 
           uvIndexCTA.innerHTML="UV Index: "+uviValue;
+
+//Call to update Five Day Forecast//
+          const dayOne = data["daily"]["dt"][0];
+          console.log(dayOne)
         });
       });
   });
