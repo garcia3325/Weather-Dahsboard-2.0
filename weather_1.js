@@ -100,6 +100,11 @@ $(document).ready(function () {
         const humidityValue = "Humidity: " + data["main"]["humidity"] + "%";
         const windSpeedValue = "Wind Speed: " + data["wind"]["speed"] + " MPH";
         const { icon } = data.weather[0];
+        const longitude = data["coord"]["lon"];
+        const latitude = data["coord"]["lat"]
+
+        console.log(longitude);
+        console.log(latitude);
 
         cityNameCTA.innerHTML = nameValue;
         temperatureCTA.innerHTML = tempValue;
@@ -107,6 +112,24 @@ $(document).ready(function () {
         windSpeedCTA.innerHTML = windSpeedValue;
         document.querySelector(".imgCTA").src =
           "http://openweathermap.org/img/wn/" + icon + ".png";
+
+
+// Second Call to get UV Index//
+          fetch(
+            "https://api.openweathermap.org/data/2.5/onecall?lat="+
+            latitude+
+            "&lon="+
+            +longitude
+            +'&exclude=minutely,hourly,daily'
+            +"&appid=389e99137584af0845e21489c7fa8c55"
+        )
+        .then((response) => response.json())
+        .then((data) => {
+          const uviValue = data["current"]["uvi"]
+          console.log(uviValue)
+
+          uvIndexCTA.innerHTML="UV Index: "+uviValue;
+        });
       });
   });
 });
