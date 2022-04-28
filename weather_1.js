@@ -11,8 +11,8 @@ $(document).ready(function () {
   const temperatureCTAEL = document.getElementById("temperatureCTA");
   const humidityCTAEL = document.getElementById("humidityCTA");
   const windSpeedCTA = document.getElementById("windSpeedCTA");
-  const uvIndexCTA = document.getElementById("uvIndexCTA");
-  const imgCTA = document.getElementById("imgCTA");
+  const uvIndexCTAEL = document.getElementById("uvIndexCTA");
+  const imgCTAEL = document.getElementById("imgCTA");
 
   //Card 1//
   const dateOne = document.getElementById("dayone");
@@ -85,7 +85,7 @@ $(document).ready(function () {
     const searchValue = $("#searchbar").val();
     console.log(searchValue);
 
-    //APIkey and Fetch Function/
+    //APIkey, Fetch Function and Current Weather/
 
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -99,13 +99,14 @@ $(document).ready(function () {
         const tempValue = "Temperature: " + data["main"]["temp"] + " F";
         const humidityValue = "Humidity: " + data["main"]["humidity"] + "%";
         const windSpeedValue = "Wind Speed: " + data["wind"]["speed"] + " MPH";
+        const { icon } = data.weather[0];
 
         cityNameCTA.innerHTML = nameValue;
         temperatureCTA.innerHTML = tempValue;
         humidityCTA.innerHTML = humidityValue;
         windSpeedCTA.innerHTML = windSpeedValue;
-      })
-
-      .catch((err) => alert("Wrong City Name"));
+        document.querySelector(".imgCTA").src =
+          "http://openweathermap.org/img/wn/" + icon + ".png";
+      });
   });
 });
