@@ -83,7 +83,6 @@ $(document).ready(function () {
   //Function that save user inputs in search bar//
   $("#searchbtn").on("click", function () {
     const searchValue = $("#searchbar").val();
-    console.log(searchValue);
 
     //APIkey, Fetch Function and Current Weather/
 
@@ -102,9 +101,6 @@ $(document).ready(function () {
         const { icon } = data.weather[0];
         const longitude = data["coord"]["lon"];
         const latitude = data["coord"]["lat"]
-
-        console.log(longitude);
-        console.log(latitude);
 
         cityNameCTA.innerHTML = nameValue;
         temperatureCTA.innerHTML = tempValue;
@@ -127,14 +123,18 @@ $(document).ready(function () {
         .then((response) => response.json())
         .then((data) => {
           const uviValue = data["current"]["uvi"];
-          console.log(uviValue)
-
           uvIndexCTA.innerHTML="UV Index: "+uviValue;
 
 //Call to update Five Day Forecast//
-          const dayOne = data["daily"]["dt"][0];
-          console.log(dayOne)
+          const dayOne = data["daily"]["0"]["dt"];
+          var date = new Date(dayOne * 1000);
+          console.log(dayOne);
+
+//local storage//
+localStorage.setItem(nameValue,nameValue);
+const searchValue = localStorage.getItem(nameValue);
+console.log(searchValue);
         });
       });
   });
-});
+})
