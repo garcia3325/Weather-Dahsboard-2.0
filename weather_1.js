@@ -117,23 +117,33 @@ $(document).ready(function () {
             "&lon="+
             +longitude
             +'&units=imperial'
-            +'&exclude=minutely,hourly,daily'
+            +'&exclude=minutely,hourly'
             +"&appid=389e99137584af0845e21489c7fa8c55"
         )
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           const uviValue = data["current"]["uvi"];
           uvIndexCTA.innerHTML="UV Index: "+uviValue;
 
 //Call to update Five Day Forecast//
-          const dayOne = data["daily"]["0"]["dt"];
+
+//dayOne
+          const dayOne = data["daily"]["1"]["dt"];
           var date = new Date(dayOne * 1000);
-          console.log(dayOne);
+          const dayOneTemp = data["daily"]["1"]["temp"]["day"];
+          const dayOneHumidity = data["daily"]["1"]["humidity"];
+          const dayOneIcon = data["daily"]["1"]["weather"]["0"]["icon"];
+          
+          dayone.innerHTML =date;
+          dayOneTemperature.innerHTML = dayOneTemp;
+          dayOneHumidity.innerHTML = dayOneHumidity;
+          document.querySelector(".imageOne").src =
+          "http://openweathermap.org/img/wn/" + dayOneIcon + ".png";
 
 //local storage//
 localStorage.setItem(nameValue,nameValue);
-const searchValue = localStorage.getItem(nameValue);
-console.log(searchValue);
+const searchValue = localStorage.getItem(nameValue)
         });
       });
   });
