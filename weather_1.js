@@ -100,7 +100,7 @@ $(document).ready(function () {
         const windSpeedValue = "Wind Speed: " + data["wind"]["speed"] + " MPH";
         const { icon } = data.weather[0];
         const longitude = data["coord"]["lon"];
-        const latitude = data["coord"]["lat"]
+        const latitude = data["coord"]["lat"];
 
         cityNameCTA.innerHTML = nameValue;
         temperatureCTA.innerHTML = tempValue;
@@ -109,42 +109,103 @@ $(document).ready(function () {
         document.querySelector(".imgCTA").src =
           "http://openweathermap.org/img/wn/" + icon + ".png";
 
-
-// Second Call to get UV Index//
-          fetch(
-            "https://api.openweathermap.org/data/2.5/onecall?lat="+
-            latitude+
-            "&lon="+
-            +longitude
-            +'&units=imperial'
-            +'&exclude=minutely,hourly'
-            +"&appid=389e99137584af0845e21489c7fa8c55"
+        // Second Call to get UV Index//
+        fetch(
+          "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+            latitude +
+            "&lon=" +
+            +longitude +
+            "&units=imperial" +
+            "&exclude=minutely,hourly" +
+            "&appid=389e99137584af0845e21489c7fa8c55"
         )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          const uviValue = data["current"]["uvi"];
-          uvIndexCTA.innerHTML="UV Index: "+uviValue;
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            const uviValue = data["current"]["uvi"];
+            uvIndexCTA.innerHTML = "UV Index: " + uviValue;
 
-//Call to update Five Day Forecast//
+            //Call to update Five Day Forecast//
 
-//dayOne
-          const dayOne = data["daily"]["1"]["dt"];
-          var date = new Date(dayOne * 1000);
-          const dayOneTemp = data["daily"]["1"]["temp"]["day"];
-          const dayOneHumidity = data["daily"]["1"]["humidity"];
-          const dayOneIcon = data["daily"]["1"]["weather"]["0"]["icon"];
-          
-          dayone.innerHTML =date;
-          dayOneTemperature.innerHTML = dayOneTemp;
-          dayOneHumidity.innerHTML = dayOneHumidity;
-          document.querySelector(".imageOne").src =
-          "http://openweathermap.org/img/wn/" + dayOneIcon + ".png";
+            //dayOne
+            const dayOne = data["daily"]["1"]["dt"];
+            var date = new Date(dayOne * 1000);
+            const dayOneTemp =
+              "Temperature " + data["daily"]["1"]["temp"]["day"] + " F";
+            const dayOneHumidity =
+              "Humidity " + data["daily"]["1"]["humidity"] + "%";
+            const dayOneIcon = data["daily"]["1"]["weather"]["0"]["icon"];
 
-//local storage//
-localStorage.setItem(nameValue,nameValue);
-const searchValue = localStorage.getItem(nameValue)
-        });
+            document.getElementById("dayone").innerHTML = date;
+            document.getElementById("temperatureone").innerHTML = dayOneTemp;
+            document.querySelector(".imageOne").src =
+              "http://openweathermap.org/img/wn/" + dayOneIcon + ".png";
+            document.getElementById("humidityone").innerHTML = dayOneHumidity;
+
+            //dayTwo
+            const dayTwo = data["daily"]["2"]["dt"];
+            var date = new Date(dayTwo * 1000);
+            const dayTwoTemp =
+              "Temperature " + data["daily"]["2"]["temp"]["day"] + " F";
+            const dayTwoHumidity =
+              "Humidity " + data["daily"]["2"]["humidity"] + "%";
+            const dayTwoIcon = data["daily"]["2"]["weather"]["0"]["icon"];
+
+            document.getElementById("daytwo").innerHTML = date;
+            document.getElementById("temperaturetwo").innerHTML = dayTwoTemp;
+            document.querySelector(".imgtwo").src =
+              "http://openweathermap.org/img/wn/" + dayTwoIcon + ".png";
+            document.getElementById("humiditytwo").innerHTML = dayTwoHumidity;
+
+            //daythree
+            const dayThree = data["daily"]["3"]["dt"];
+            var date = new Date(dayThree * 1000);
+            const dayThreeTemp =
+              "Temperature " + data["daily"]["3"]["temp"]["day"] + " F";
+            const dayThreeHumidity =
+              "Humidity " + data["daily"]["3"]["humidity"] + "%";
+            const dayThreeIcon = data["daily"]["3"]["weather"]["0"]["icon"];
+
+            document.getElementById("daythree").innerHTML = date;
+            document.getElementById("temperaturethree").innerHTML = dayThreeTemp;
+            document.querySelector(".imgthree").src =
+              "http://openweathermap.org/img/wn/" + dayThreeIcon + ".png";
+            document.getElementById("humiditythree").innerHTML = dayThreeHumidity;
+
+            //dayfour
+            const dayFour = data["daily"]["4"]["dt"];
+            var date = new Date(dayFour * 1000);
+            const dayFourTemp =
+              "Temperature " + data["daily"]["4"]["temp"]["day"] + " F";
+            const dayFourHumidity =
+              "Humidity " + data["daily"]["4"]["humidity"] + "%";
+            const dayFourIcon = data["daily"]["4"]["weather"]["0"]["icon"];
+
+            document.getElementById("dayfour").innerHTML = date;
+            document.getElementById("temperaturefour").innerHTML = dayFourTemp;
+            document.querySelector(".imgfour").src =
+              "http://openweathermap.org/img/wn/" + dayFourIcon + ".png";
+            document.getElementById("humidityfour").innerHTML = dayFourHumidity;
+
+            //dayfive
+            const dayFive = data["daily"]["5"]["dt"];
+            var date = new Date(dayFive * 1000);
+            const dayFiveTemp =
+              "Temperature " + data["daily"]["5"]["temp"]["day"] + " F";
+            const dayFiveHumidity =
+              "Humidity " + data["daily"]["5"]["humidity"] + "%";
+            const dayFiveIcon = data["daily"]["5"]["weather"]["0"]["icon"];
+
+            document.getElementById("dayfive").innerHTML = date;
+            document.getElementById("temperaturefive").innerHTML = dayFiveTemp;
+            document.querySelector(".imgfive").src =
+              "http://openweathermap.org/img/wn/" + dayFiveIcon + ".png";
+            document.getElementById("humidityfive").innerHTML = dayFiveHumidity;
+
+            //local storage//
+            localStorage.setItem(nameValue, nameValue);
+            const searchValue = localStorage.getItem(nameValue);
+          });
       });
   });
-})
+});
