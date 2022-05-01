@@ -189,7 +189,7 @@ $(document).ready(function () {
 
             //dayfive
             const dayFive = data["daily"]["5"]["dt"];
-            var date = new Date(dayFive * 1000);
+    
             const dayFiveTemp =
               "Temperature " + data["daily"]["5"]["temp"]["day"] + " F";
             const dayFiveHumidity =
