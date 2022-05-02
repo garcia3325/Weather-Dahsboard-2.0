@@ -44,6 +44,7 @@ $(document).ready(function () {
   const temperatureFive = document.getElementById("temperaturefive");
   const humidityFive = document.getElementById("humidityfive");
 
+
   //Create and append Date based on user browser to page//
 
   setInterval(() => {
@@ -83,8 +84,8 @@ $(document).ready(function () {
   //Function that save user inputs in search bar//
   $("#searchbtn").on("click", function () {
     const searchValue = $("#searchbar").val();
-
-    //APIkey, Fetch Function and Current Weather/
+    
+    //Open Weather APIkey, Fetch Function and Current Weather//
 
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -129,7 +130,7 @@ $(document).ready(function () {
 
             //dayOne
             const dayOne = data["daily"]["1"]["dt"];
-            var date = new Date(dayOne * 1000);
+            var date = new Date(dayOne * 1000).toDateString();;
             const dayOneTemp =
               "Temperature " + data["daily"]["1"]["temp"]["day"] + " F";
             const dayOneHumidity =
@@ -144,7 +145,8 @@ $(document).ready(function () {
 
             //dayTwo
             const dayTwo = data["daily"]["2"]["dt"];
-            var date = new Date(dayTwo * 1000);
+            var date = new Date(dayTwo * 1000).toDateString();
+              
             const dayTwoTemp =
               "Temperature " + data["daily"]["2"]["temp"]["day"] + " F";
             const dayTwoHumidity =
@@ -159,7 +161,7 @@ $(document).ready(function () {
 
             //daythree
             const dayThree = data["daily"]["3"]["dt"];
-            var date = new Date(dayThree * 1000);
+            var date = new Date(dayThree * 1000).toDateString();;
             const dayThreeTemp =
               "Temperature " + data["daily"]["3"]["temp"]["day"] + " F";
             const dayThreeHumidity =
@@ -174,7 +176,7 @@ $(document).ready(function () {
 
             //dayfour
             const dayFour = data["daily"]["4"]["dt"];
-            var date = new Date(dayFour * 1000);
+            var date = new Date(dayFour * 1000).toDateString();;
             const dayFourTemp =
               "Temperature " + data["daily"]["4"]["temp"]["day"] + " F";
             const dayFourHumidity =
@@ -189,7 +191,8 @@ $(document).ready(function () {
 
             //dayfive
             const dayFive = data["daily"]["5"]["dt"];
-    
+            var day = new Date(dayFive*1000).toDateString();;
+            
             const dayFiveTemp =
               "Temperature " + data["daily"]["5"]["temp"]["day"] + " F";
             const dayFiveHumidity =
@@ -203,8 +206,9 @@ $(document).ready(function () {
             document.getElementById("humidityfive").innerHTML = dayFiveHumidity;
 
             //local storage//
-            localStorage.setItem(nameValue, nameValue);
-            const searchValue = localStorage.getItem(nameValue);
+            localStorage.setItem("searchHistory", nameValue);
+            const searchValue = localStorage.getItem("searchHistory");
+            
           });
       });
   });
